@@ -1,0 +1,11 @@
+*.gz
+*.log
+img/2024-02-22-06-56-17.png
+img/2024-02-22-07-01-30.png
+img/2024-02-22-07-01-40.png
+*.aux
+*.fdb_latexmk
+*.fls
+*.out
+*.toc
+img

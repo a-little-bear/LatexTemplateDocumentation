@@ -1,0 +1,393 @@
+\documentclass[12pt, orange, night, 0.5in]{hw}
+
+\usepackage{clsfiles/mat240}
+\usepackage{clsfiles/csc240}
+\usepackage[noend, noline]{clsfiles/alg}
+
+\def\course{MAT001: Introduction to C++ Template}
+%\def\headername{Assignment 0}
+\def\name{\href{https://alittlebear.us.to}{Joseph Siu}}
+\def\email{joseph.siu@mail.utoronto.ca}
+\def\info{This is the abstract. This document intent to provide an example for the customized hw.cls Document Class. This sentence is intend to increase the length of the Info for testing purposes. In addition, I have no copyright to Goat Qun sensei's image at the right: \href{https://www.qunwang330.com/}{qun's blog}. Command \tit{headername} is also commented to illustrate the default header.}
+\def\logo{clsfiles/qunwang}
+
+\newop{\A}{A}
+
+\begin{document} 
+
+\coverpage[clsfiles/night]
+
+\tableofcontents
+
+\section{Introduction to TColorBox}
+
+\newtbox[Note]{
+    The commands for tcolorbox environments are extremely simplified for the purpose of faster note taking, \eg, during lecture.
+}
+
+\newch{1}{
+    This exercise helps the readers to understand the basic usage of TColorBox environments created by \tit{hw.cls}.
+
+    \newq{1ch1}{
+        Prove that $\sqrt2$ cannot rational.
+        \qbreak
+        \newp{[The world famous proof]
+            Assume \tit{ad absurdum} $\sqrt2$ is rational,\ie, $\sqrt2=\ds\frac{\al}{\be}$ for some coprime integer $\al$ and some $\be\in\N$. Then, by squaring both sides we obtain $2=\ds\frac{\al^2}{\be^2}$, which implies $\al^2=2\be^2$ since $\be\neq0$ (assuming natural does not include $0$). Then, since $\al^2,\be^2\in\Z^+$, $2\mid\al^2$, and $2$ is a prime number, thus $2\mid\al$. Let $\al=2\ga$ for some $\ga\in\Z$, substitute $\ga$ into the equation and now we have $2\be^2=4\ga^2$, which implies $\be^2=2\ga^2$. By the same argument, $2\mid\be$, which contradicts the assumption that $\al$ and $\be$ are coprime. Therefore, $\sqrt2$ cannot be rational.
+        }
+    }
+}
+
+The \verb=\alt{}= command within align math environment is also useful, example shown below.
+
+\newe{1}{
+    
+    \newn{
+        This exercise aims at demonstrating that various approaches can be used to ocmpute the same integral. More precisely, compute the indefinite integral \[\int \frac{\D x}{\sqrt{a^2+x^2}}, a>0.\]
+    }
+
+    \newq{1e1}{
+        Using trigonometric substitution $x=a\tan t,  -\frac\pi2<t<\frac\pi2$.
+        
+        \qbreak
+        \newp{
+            Consider 2 cases:
+            \begin{proofcases}
+                \case The case that we want to show.
+                \indenv{
+                    Let $x=a\tan t$, then isolate $t$ we have $t=\arctan\bra{\frac{x}{a}}$ and $\D t=\frac1a\cd\frac{1}{1+\bra{\frac{x^2}{a^2}}}\D x=\frac{a}{x^2+a^2}\D x$. 
+                    \begin{center}
+                        \begin{tikzpicture}[ang/.style={draw,angle eccentricity=1.5, angle radius=0.75cm}]
+                            \coordinate (A) at (0,0);
+                            \coordinate (B) at (2,0);
+                            \coordinate (C) at (2,1.5);
+                            
+                            \draw (A) -- node[below]{$a$} (B) -- node[right]{$x$} (C) -- node[above left]{$\sqrt{x^2+a^2}$} cycle
+                            pic ["$t$",ang]{angle=B--A--C};
+                        \end{tikzpicture}
+                    \end{center}Now, we substitute $t$ into $x$ and we have \begin{align*}
+                        \int\frac{\D x}{\sqrt{a^2+x^2}} &= \int \frac{1}{\sqrt{a^2+a^2\tan^2 t}}\cd\frac{x^2+a^2}{a}\D t\\
+                        &=\int \frac{1}{|a|}\frac{1}{\sqrt{1+\tan^2 t}}\frac{a^2\tan^2t+a^2}{a}\D t\\
+                        &=\int\frac{\tan^2 t + 1}{\sqrt{\tan^2 t + 1}}\D t\\
+                        &=\int\frac{\sec^2 t}{\sqrt{\sec^2 t}}\D t,\\
+                    \alt{since $t\in\bra{-\frac\pi2,\frac\pi2}$, this gives $\sec t>0$, thus }
+                    &= \int \sec t\D t\\
+                    &= \int \frac{1}{\cos t}\D t,\\
+                    \alt{from [insert eq num here] we have}
+                    &= \ln\abs{\sec t + \tan t}+C\\
+                    &= \ln\abs{\frac{\sqrt{x^2+a^2}}{a}+\frac{x}{a}} + C\\
+                    &= \ln\abs{\sqrt{x^2+a^2}+x} - \ln\abs{a} + C\\
+                    &= \ln\abs{x+\sqrt{x^2+a^2}} + C.\\
+                    \end{align*}
+
+                    \newr{
+                        As you can see, nested tcolorbox tend to stay as a whole, thus overusing tcolorboxes may cause too many empty spaces.
+                    }
+
+                    \newr{
+                        As below has shown, when starting a new tcolorbox, it is always good that the newpage command is put prior to the new tcolorbox.
+                    }
+                    
+                }
+                \case The case we want to ignore
+                \subcase This subcase is also going to be ignored due to lack of content.
+            \end{proofcases}
+        }
+    }
+}
+
+\np
+\newe{2}{
+    \newn{
+        This is a new exercise same as exercise \ref{exercise:e1}, however a newpage command is used prior to this exercise, as we can see the boxes are looking as normal in this case despite the boxes exceeded the footer, and more spaces were rearranged by Latex to fit the boxes.
+    }
+
+    \newq{1e2}{
+        Using trigonometric substitution $x=a\tan t,  -\frac\pi2<t<\frac\pi2$.
+        
+        \qbreak
+        \newp{
+            Consider 2 cases:
+            \begin{proofcases}
+                \case The case that we want to show.
+                \indenv{
+                    Let $x=a\tan t$, then isolate $t$ we have $t=\arctan\bra{\frac{x}{a}}$ and $\D t=\frac1a\cd\frac{1}{1+\bra{\frac{x^2}{a^2}}}\D x=\frac{a}{x^2+a^2}\D x$. 
+                    \begin{center}
+                        \begin{tikzpicture}[ang/.style={draw,angle eccentricity=1.5, angle radius=0.75cm}]
+                            \coordinate (A) at (0,0);
+                            \coordinate (B) at (2,0);
+                            \coordinate (C) at (2,1.5);
+                            
+                            \draw (A) -- node[below]{$a$} (B) -- node[right]{$x$} (C) -- node[above left]{$\sqrt{x^2+a^2}$} cycle
+                            pic ["$t$",ang]{angle=B--A--C};
+                        \end{tikzpicture}
+                    \end{center}Now, we substitute $t$ into $x$ and we have \begin{align*}
+                        \int\frac{\D x}{\sqrt{a^2+x^2}} &= \int \frac{1}{\sqrt{a^2+a^2\tan^2 t}}\cd\frac{x^2+a^2}{a}\D t\\
+                        &=\int \frac{1}{|a|}\frac{1}{\sqrt{1+\tan^2 t}}\frac{a^2\tan^2t+a^2}{a}\D t\\
+                        &=\int\frac{\tan^2 t + 1}{\sqrt{\tan^2 t + 1}}\D t\\
+                        &=\int\frac{\sec^2 t}{\sqrt{\sec^2 t}}\D t,\\
+                    \alt{since $t\in\bra{-\frac\pi2,\frac\pi2}$, this gives $\sec t>0$, thus }
+                    &= \int \sec t\D t\\
+                    &= \int \frac{1}{\cos t}\D t,\\
+                    \alt{from [insert eq num here] we have}
+                    &= \ln\abs{\sec t + \tan t}+C\\
+                    &= \ln\abs{\frac{\sqrt{x^2+a^2}}{a}+\frac{x}{a}} + C\\
+                    &= \ln\abs{\sqrt{x^2+a^2}+x} - \ln\abs{a} + C\\
+                    &= \ln\abs{x+\sqrt{x^2+a^2}} + C.\\
+                    \end{align*}
+
+                    \newr{
+                        As you can see, nested tcolorbox tend to stay as a whole, thus overusing tcolorboxes may cause too many empty spaces.
+                    }
+
+                    \newr{
+                        As below has shown, when starting a new tcolorbox, it is always good that the newpage command is put prior to the new tcolorbox.
+                    }
+                    
+                }
+                \case The case we want to ignore
+                \subcase This subcase is also going to be ignored due to lack of content.
+            \end{proofcases}
+        }
+    }
+
+}
+
+\subsection{Available Boxes}
+
+\newch{2}{
+    \newd[Insert a random definition here]{1}{
+        1   
+    }
+    \newpp{1}{
+        xd
+    }
+    \newl{1}{
+        1   
+    }
+    \newq{1ch2}{
+        1   
+    }
+
+    \newcl{1}{
+        1   
+    }
+
+    \newco{1}{
+        1   
+    }
+}
+
+\newe{3}{
+    \newh{
+        Hint.
+    }
+
+    \newr{
+        Remark.
+    }
+}
+
+\newt{1}{Random theorem.}
+
+\newu{1}{
+    \newn{
+        Note. This is the only box that does not have an ending pattern :)
+    }
+
+    \newm{
+        Mathnote.
+    }
+
+    \newp{[To modify the message of proof we need to add the square brackets within the curvy bracket,]unlike other environemnts. 
+        Proof.
+    }
+}
+
+\neweg{
+    Tomato is not a fruit.
+}
+
+
+\np
+\section{Random Environments}
+
+\subsection{Listings}
+
+The usage of the package \tit{listings} is as follows:
+
+The defualt langauge for environment \tit{code} is Python, can be changed in the cls file.
+
+\begin{lstlisting}[language=Python]
+
+    # This is a bubble sort algorithm
+    def bubble_sort(lst):
+        n = len(lst)
+        for i in range(n):
+            for j in range(0, n - i - 1):
+                if lst[j] > lst[j + 1]:
+                    lst[j], lst[j + 1] = lst[j + 1], lst[j]
+        return lst
+
+    print("Hello World")
+\end{lstlisting}
+
+
+\begin{code}
+
+    # This is a bubble sort algorithm
+    def bubble_sort(lst):
+        n = len(lst)
+        for i in range(n):
+            for j in range(0, n - i - 1):
+                if lst[j] > lst[j + 1]:
+                    lst[j], lst[j + 1] = lst[j + 1], lst[j]
+        return lst
+
+    print("Hello World")
+\end{code}
+
+There is also a specialized latex code environment.
+
+\begin{latexcode}
+    \lstnewenvironment{code}{\lstset{language=\defaultlanguage}}{}
+    \lstnewenvironment{latexcode}{\lstset{language=Tex}}{}
+\end{latexcode}
+
+\subsection{Indentation}
+
+The useful indent command from package \tit{changepage}:
+
+\indenv{
+    This is an indented environment (multiple paragraphs)
+
+    Hehe.
+
+    The default indentation is (1)cm.
+
+    \indenv[3]{
+        This environment can be nested
+
+        \newp{
+            May contain t color boxes
+        }
+    }
+}
+
+
+\np
+\section{Additional Packages}
+
+There are also optional packges for specific courses, \eg, \tit{mat240}.
+
+After using the \tit{mat240} package under folder \tit{clsfiles}, we can see the following command works: $\im A$, $\vspan X$.
+
+Similarily, for \tit{csc240}, we can see $\aand, \iimplies$ all work.
+
+\np
+\section{Images}
+
+\verb=\fig= is very convinient...
+
+\fig{img/2024-02-22-06-56-17.png}
+
+No default caption and label.
+
+\fig[caption=hehe]{img/2024-02-22-07-01-30.png}
+
+The ratio of the image is fixed.
+
+\fig[width=3in,height=1in,caption=byebye world $\int_a^b$, label=hi]{img/2024-02-22-07-01-40.png}
+
+\fig[width=3in,height=5in,caption=hello world $\int_a^b$, label=bye]{img/2024-02-22-07-01-40.png}
+
+Especially with the \verb=PasteImage= plugin. 
+
+Figure \ref{fig:hi} can be referenced in this way.
+
+\np
+\section{Arrows and Stacks}
+
+Vertical Equal symbol is too hard to implement so only vertical arrow and Arrow are provided, the horizontal ones are covered by mathtool package with the commands xleftarrow etc.
+
+$$\T{bye}\Dar[2]\int_a^b f(x)\D x\quad\quad\quad\dar[2]n\to\infty$$
+$$\T{bye}\Uar[2]\int_a^b f(x)\D x\quad\quad\quad\uar[2]n\to\infty$$
+
+
+\begin{align*}
+    &a & &= & &b \\
+    n\to\infty&\dar & &  & &\uar u = n + 1 \\
+    &x & &= & &y
+\end{align*}
+
+You can do this to reduce the width between the alignments:
+
+% centering
+\begin{center}
+    % reduce the width of the page align is on
+    \begin{minipage}{0.5\textwidth}
+        \begin{align*}
+            &a & &= & &b \\
+            n\to\infty&\dar & &  & &\uar u = n + 1 \\
+            &x & &= & &y
+        \end{align*}
+    \end{minipage}
+\end{center}
+
+hello, over under and overunder follow the order from top to bottom, in my opinion this is more intuitive that the asmmath method, anyway,
+
+$\over{a}{b}$, $\under{b}{c}$, $\overunder{a}{b}{c}$ testing spacing
+
+end of doc (ofc not)
+
+\np
+\section{Algorithm}
+
+Sample Usage:
+
+\begin{latexcode}
+\usepackage[noend, noline]{clsfiles/alg}
+\newop{\A}{A}
+\begin{document}
+\newalg[This is not a caption]{
+    \as \ag{j}{0}
+    \afor{\ag{i}{1}\ato\A}{
+        \aif{$i$ is even}{
+            \as \ag{j}{i}
+        \aelif{$i$ is odd}
+            \as \ag{j}{i+1} \Comment{?}
+        \aelse
+            \as \ag{j}{-1}
+        }
+    }
+    \afunc{Name}{\A}{
+        \awh{$\A\neq0$}{
+            \as \ag{j}{A}
+        }
+    }
+}
+\end{document}
+\end{latexcode}
+
+which produces:
+
+\newalg[This is not a caption]{
+    \as \ag{j}{0}
+    \afor{\ag{i}{1}\ato\A}{
+        \aif{$i$ is even}{
+            \as \ag{j}{i}
+        \aelif{$i$ is odd}
+            \as \ag{j}{i+1} \Comment{?}
+        \aelse
+            \as \ag{j}{-1}
+        }
+    }
+    \afunc{Name}{\A}{
+        \awh{$\A\neq0$}{
+            \as \ag{j}{A}
+        }
+    }
+}
+
+Don't forget the \verb=\as= to make new line.
+
+\end{document}

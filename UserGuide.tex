@@ -1,0 +1,449 @@
+\documentclass[12pt, cyan, night]{hw}
+
+\def\course{MAT114: Latex IV}
+\def\headername{UserGuide XX}
+\def\name{\href{https://alittlebear.us.to}{Joseph Siu}}
+\def\email{joseph.siu@mail.utoronto.ca}
+\def\info{This is the user guide document to the customized latex document class \tit{hw.cls}.}
+% \def\logo{clsfiles/uoft} % default
+
+\begin{document} 
+
+\coverpage[clsfiles/stars]
+
+\tableofcontents
+
+\section{Introduction}
+
+\noindent
+The DocumentClass \textit{hw.cls} aims to provide a simple and easy template for writing math notes on latex. The link to hw.cls, Example.tex, and Template.tex can be found at \url{https://github.com/a-little-bear/Latex-Template}.\\
+
+\noindent
+Here is the template of a new tex file (note that all 6 \verb=\def= and the cover command are optional): 
+\begin{latexcode}
+    \documentclass[12pt, brown, sepia, 0.5in]{hw}
+
+    % \def\course{}
+    % \def\headername{}
+    % \def\name{}
+    % \def\email{}
+    % \def\info{}
+    % \def\logo{}
+    
+    \begin{document} 
+    
+    % \coverpage[clsfiles/stars]
+    
+    
+    
+    \end{document}    
+\end{latexcode}
+
+
+
+\newpage
+
+\section{Settings}
+
+\subsection{Document Preamble}\hfill
+
+\verb=\documentclass[#pt,#in,{geye,hazy,sepia,night},{green,...}]{hw}=
+
+\indenv[2]{
+    \#pt: font size, default 12pt, 9pt to 13pt
+
+    \#in: margin, 1in or 0.5in
+
+    \{geye, hazy, sepia, night\}: green, white, or yellow background; or dark mode (best with white or sakura)
+
+    \{green,cyan,blue,sakura,black,brown,white,red,orange,purple\}: main color
+}
+
+\verb=\def\course{#}=
+\explain{\#: course name}
+
+\verb=\def\headername{#}=
+\explain{\#: header name}
+
+\verb=\def\name{#}=
+\explain{\#: author name}
+
+\verb=\def\email{#}=
+\explain{\#: author email}
+
+\verb=\def\info{#}=
+\explain{\#: abstract}
+
+\verb=\def\logo{#}=
+\explain{\#: logo file path, the right image displayed on the cover page}
+
+
+
+\subsection{Document Class}\hfill
+
+\verb=\skippar{5pt}=
+\explain{Space between paragraphs, Default: 5pt}
+
+\verb=\indentpar{0pt}=
+\explain{Indentation of the first line of a paragraph, Default: 0pt}
+
+\verb=\thmstyle{definition}=
+\explain{Theorem style from asmthm, Default: definition}
+
+\verb=\defaultlanguage{python}=
+\explain{Default Language for listings}
+
+\verb=\thmopacity{0.8}=
+\explain{Opacity of light mode tcolorbox (night mode -0.1), Default: 0.8}
+
+\verb=\nightmodebackground{\clsfiles/nightsky}=
+\explain{Background image for night mode}
+
+
+
+
+
+\newpage
+\section{Commands}
+
+\subsection{Formatting Commands}\hfill
+
+\verb=\indenv[2][1]{\begin{adjustwidth}{#1cm}{}#2\end{adjustwidth}}=
+\explain{Indented environment, use package \textit{changepage}}
+\begin{verbatim}
+                Example: \indenv{
+                    This is an indented environment (multiple paragraphs)
+                }
+                \indenv[10]{
+                    This is an indented environment with 10mm indentation
+                }
+\end{verbatim}
+
+\verb=\np{\newpage}=
+
+\verb=\ds{\displaystyle}=\\
+
+\verb=\bb{\mathbb},\cal{\mathcal},\scr{\mathscr},\frak{\mathfrak},\bf{\mathbf}=
+\explain{shortcut for math fonts command}\\
+
+\verb=\tit{\textit},\trm{\textrm},\tsf{\textsf},\ttt{\texttt},\tsc{\textsc},\tbf{\textbf}=
+\explain{shortcut for text fonts command}\\
+
+\verb=\extractfootnote{#1}=
+\explain{To show food note created within tcolorboxes (title or content), let \#1 be the name of the environment, e.g. theorem definition}
+
+\begin{verbatim}
+\newenvironment{proofcases}{
+    \newcommand{\case}
+    \newcommand{\subcase}
+}
+\end{verbatim}
+\ind{New environment for proof cases}
+
+
+
+
+\newpage
+\subsection{TColorBox Commands}\hfill
+
+\verb=\qbreak=
+\explain{End the question and follow by the proof / solution}
+
+\verb=\envbreak=
+\explain{And a seperator line within an environment}
+
+\verb=\tcbcnt=
+\explain{Set the counter for tcolorbox theorem environment}
+
+\verb=\newn,\newm, \newtbox=
+\explain{New no/title tcolorbox}
+\begin{verbatim}
+                Example: \newn{
+                    This is a new notitle "note" tcolorbox 
+                }
+                \newm{
+                    This is a new notitle "mathnote" tcolorbox 
+                }
+                \newtbox[optional: #1]{
+                    This is a new titled "tbox" tcolorbox 
+                
+                }
+\end{verbatim}
+
+\verb=\newh,\newr,\newp, \neweg=
+\explain{New asmthm theorem tcolorbox environment with prefixes}
+\begin{verbatim}
+                Example: \newh{
+                    This is a new "hint" asmthm tcolorbox environment 
+                }
+                \newr{
+                    This is a new "remark" asmthm tcolorbox environment 
+                }
+                \newp{
+                    This is a new "proof" asmthm tcolorbox environment 
+                }
+                \neweg{
+                    This is a new "Example" asmthm tcolorbox environment
+                }
+\end{verbatim}
+
+
+\verb=\newq,\newcl,\newd,\newco,\newt,\newl,\newe,\newu,\newch=
+\explain{New TColorBox theorem environment with titles}
+\begin{verbatim}
+                Example: \newq[optional: #EnvName]{#label}{
+                    This is a new "question" tcolorbox theorem environment 
+                }
+                \newcl[optional: #EnvName]{#label}{
+                    This is a new "claim" tcolorbox theorem environment 
+                }
+                \newd[optional: #EnvName]{#label}{"definition"}
+                \newco[optional: #EnvName]{#label}{"corollary"}
+                \newt[optional: #EnvName]{#label}{"theorem"}
+                \newl[optional: #EnvName]{#label}{"lemma"}
+                \newe[optional: #EnvName]{#label}{"exercise"}
+                \newu[optional: #EnvName]{#label}{"unit"}
+                \newch[optional: #EnvName]{#label}{"chapter"}
+\end{verbatim}\\
+
+\verb=\ref{#1:#label}=
+\explain{Use ref to reference the environment, where \#1:\#label e.g. is "question:q1"}
+
+\verb=\tbox[optional:#1]{#2}=
+\explain{optional \#1 define more options, \#2 is the centered title}
+
+\newpage
+\subsection{Math Commands}\hfill
+
+\verb=\numberthis=
+\explain{Add the line number in unnumbered math environment}
+
+\verb=\T[1]{\text{#1}}=
+\explain{Abbreviation of $\backslash$text\{\}}
+
+\begin{verbatim}
+\Aleq[3]{#1 &=#2 &\text{#3}&&\\}
+\end{verbatim}
+\ind[20]{(left) = (right) + (explanation)}
+
+Similarly \verb=\Alleq=, \verb=\Algeq= are for $\le, \ge$.
+
+\verb=\cd{\cdot}=
+\explain{Abbreviation of $\backslash$cdot}
+
+\verb=\st{\text{ s.t. }}=
+\explain{Abbreviation of $\backslash$text\{ s.t. \}}
+
+\verb=\ie{\text{ i.e. }}=
+\explain{Abbreviation of $\backslash$text\{ i.e. \}}
+
+\verb=\eg{\text{ e.g. }}=
+\explain{Abbreviation of $\backslash$text\{ e.g. \}}
+
+\verb=\alt[1]{\intertext{#1}}=
+\explain{Insert line between align math equations, $\backslash\backslash$ included}
+
+\verb=\D{\mathop{}\!\mathrm{d}}=
+\explain{d symbol for differentiation, example: $\backslash$D x}
+
+\begin{verbatim}
+\DD[2]{\frac{\D #1 }{\D #2}}
+\end{verbatim}
+\ind[20]{Leibniz's notation of differentiation, example: $\backslash$DD\{x\}\{y\}}
+
+\verb=\sgn{sgn}=
+\explain{defined math operator sgn as the sign function}
+
+\verb=\over{#1}{#2},\under{#1}{#2},\overunder{#1}{#2}{#3}=
+\explain{Abbreviations of overset underset, follow the order from top to bottom}
+
+
+
+\newpage\subsection{Symbol Abbreviations}\hfill
+
+
+\subsubsection{Greek Letters}
+
+All letters have been shortened into the first 2 letters (or 1 if the total length is 1). For example,
+\begin{verbatim}
+    \al -> \alpha
+    \Al -> \Alpha
+    \be -> \beta
+    \ph -> \phi
+    \om -> \omega
+    \Om -> \Omega
+\end{verbatim}
+
+The variable versions are also included, for example,
+\begin{verbatim}
+    vep -> \varepsilon
+    vph -> \varphi
+    vOm -> \varOmega
+\end{verbatim}
+
+
+
+\subsubsection{Other symbols and Operations}
+\begin{verbatim}
+  \C -> \mathbb{C} == complex
+  \R -> \mathbb{R} == reals
+  \Q -> \mathbb{Q} == rationals
+  \Z -> \mathbb{Z} == integers
+  \N -> \mathbb{N} == naturals 
+  \F -> \mathbb{F} == field
+
+  \p -> \partial
+
+  \? -> \stackrel{?}{=} == question mark on equal sign
+  \ra -> \rightarrow == rightarrow (single line)
+  \Ra -> \Rightarrow == Rightarrow (double lines)
+  \is -> \equiv == equivalent (triple lines)
+  \sse -> \subseteq
+  \injective \surjective \bijective
+
+  \arr = angle brackets
+  \bra = parenthesis ()
+  \sqrbra = square brackets []
+  \curbra = curly brackets {}
+  \abs = absolute value | |
+  \norm = double absolute || ||
+  \ceil = ceiling + () + ceiling
+  \floor = floor + () + floor
+  \near = floor + () + ceiling
+
+  \func[3]{#1: #2 \rightarrow #3} == function (name, domain, codomain)
+  \Pset{#} -> \mathcal{P}(#) == power set
+  \Relate{#}{##} -> #\mathcal{R}## == relation
+  \GF[1][2]{\bb{F}_{#1}} == Galois field, default #1 = 2
+  \modulo[1][n]{\Z/#1\Z} == modulo, default #1 = n
+  
+  \P -> \mathbb{P} == primes
+  \nil -> \varnothing == empty set
+  \O -> \mathcal{O} == big O 
+  \relate -> \mathcal{R} == relate (relation)
+
+  \Dar[1][1] = scaled Downarrow
+  \dar[1][1] = scaled downarrow
+  \Uar[1][1] = scaled Uparrow
+  \uar[1][1] = scaled uparrow
+\end{verbatim}
+
+\subsection{Image and Listing}
+
+\subsubsection{Image}
+
+Floating and centered figure with fixed ratio:
+\begin{verbatim}
+    \fig[
+        width=0.5\textwidth,
+        height=0.5\textheight,
+        label={},
+        caption={},
+        Optionals
+    ]{path}
+\end{verbatim}
+Only path is required, optional keys are also available.
+
+\subsubsection{Listing}
+
+Listings need to be accessed through the begin and end method:
+\begin{verbatim}
+    \begin{code}[language=\defaultlanguage]
+    ...
+    \end{code}
+
+    \begin{latexcode}[language=[LaTeX]Tex]
+    ...
+    \end{latexcode}
+\end{verbatim}
+
+\newpage
+\section{Other Notable Commands}
+
+\begin{verbatim}
+  \renewcommand{\qedsymbol}
+  {$_{\scriptstyle \substack{\sc{quod}\\\sc{erat}\\\sc{dem}
+  \scalebox{0.53}{$\blacksquare$}}}$}
+\end{verbatim}
+\ind[20]{Modified QED symbol}
+
+
+\section{Additional Packages}
+
+\subsection{MAT240}
+
+
+\verb=\vspan{span}=
+\explain{span in linear algebra, Math Operator}
+
+\verb=\rank{rank}=
+\explain{rank in linear algebra, Math Operator}
+
+\verb=\im{im}=
+\explain{image in linear algebra, Math Operator}
+
+
+\subsection{CSC240}
+
+\verb=AND,OR,IMPLIES,IFF,XOR=
+
+\verb=\aand,\oor,\iimplies,\iif,\xor=
+\explain{The weird symbols for CSC240}
+
+\subsection{Alg}
+
+This is a package designed for pseudocode. For sample usage please refer to Example.tex
+
+\verb=\usepackage[noend,noline]{clsfiles/alg}=
+
+noend parameter removes the ending keywards, noline removes the line numbers.
+
+To use the algorithm / aogirithmic environment: \verb=\newalg[]{}= where the optional parameter is the title of the algorithm.
+
+\begin{latexcode}
+    \afunc{name}{para}{content}
+    \afor{condition}{content}
+    \aforall{condition}{content}
+    \awh{condition}{content}
+    \arep{content}{termination}
+    \aproc{name}{para}{content}
+    \alo{content}
+
+    \aif{condition}{
+        content
+    \aelif{condition}
+        content
+    \aelse
+        content
+    }
+
+    \as \State - new line
+    \ase \Statex - new line without line number
+
+\end{latexcode}
+
+Moreover,
+
+\begin{latexcode}
+    \ato - bolded to
+    \alen{#1} - $#1.length$
+    \ag{#1}{#2} - $#1 \gets #2$
+\end{latexcode}
+
+
+\newpage
+\section{Known Bugs / Improvements}
+
+\begin{enumerate}
+    \item Nest chapter, exercise, unit together are unlickly to work.
+    \item To improve readability, the environments should try to not be nested, especially during page breaking. 
+    \item The number counters cannot align with section numbers (counters are not well defined).
+    \item The color box sometimes touches the footer.
+    \item Make sure use \verb=\np= or \verb=\newpage= for new exercise/unit/chapter so that the page splitting functions properly (due to nested tcolorbox force breakable bug).
+    \item Allow more line spacing for alg package.
+\end{enumerate}
+
+
+
+
+\end{document}
