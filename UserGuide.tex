@@ -1,4 +1,4 @@
-\documentclass[12pt, cyan, night]{hw}
+\documentclass[12pt, cyan, night]{LatexTemplate/hw}
 
 \def\course{MAT114: Latex IV}
 \def\headername{UserGuide XX}
@@ -9,19 +9,21 @@
 
 \begin{document} 
 
-\coverpage[clsfiles/stars]
+\coverpage[LatexTemplate/clsfiles/stars]
 
 \tableofcontents
 
 \section{Introduction}
 
 \noindent
-The DocumentClass \textit{hw.cls} aims to provide a simple and easy template for writing math notes on latex. The link to hw.cls, Example.tex, and Template.tex can be found at \url{https://github.com/a-little-bear/Latex-Template}.\\
+The DocumentClass \textit{hw.cls} aims to provide a simple and easy template for writing math notes on latex. This documentation can be found in \url{https://github.com/a-little-bear/LatexTemplateDocumentation}, and the template can be found at \url{https://github.com/a-little-bear/LatexTemplate}.\\
+
+To use this template on VSCode, first use git to add the repository as a submodule in the latex project folder. To do this, in Terminal type \lstinline{git submodule add https://github.com/a-little-bear/LatexTemplate.git} (you will see a folder LatexTemplate under your main folder). Now, copy the \lstinline{.gitignore} to that the auxillary files will not be included in your repository.\\
 
 \noindent
 Here is the template of a new tex file (note that all 6 \verb=\def= and the cover command are optional): 
 \begin{latexcode}
-    \documentclass[12pt, brown, sepia, 0.5in]{hw}
+    \documentclass[12pt, brown, sepia, 0.5in]{LatexTemplate/hw}
 
     % \def\course{}
     % \def\headername{}
@@ -29,10 +31,12 @@ Here is the template of a new tex file (note that all 6 \verb=\def= and the cove
     % \def\email{}
     % \def\info{}
     % \def\logo{}
+
+    % \useclspackage[]{}
     
     \begin{document} 
     
-    % \coverpage[clsfiles/stars]
+    % \coverpage[\clsfiles/stars]
     
     
     
@@ -47,7 +51,7 @@ Here is the template of a new tex file (note that all 6 \verb=\def= and the cove
 
 \subsection{Document Preamble}\hfill
 
-\verb=\documentclass[#pt,#in,{geye,hazy,sepia,night},{green,...}]{hw}=
+\verb=\documentclass[#pt,#in,{geye,hazy,sepia,night},{green,...}]{LatexTemplate/hw}=
 
 \indenv[2]{
     \#pt: font size, default 12pt, 9pt to 13pt
@@ -215,6 +219,9 @@ Here is the template of a new tex file (note that all 6 \verb=\def= and the cove
 \newpage
 \subsection{Math Commands}\hfill
 
+\verb=\newop{\opname}{content}=
+\explain{Keep math environment content in text mode, for example, you can use \lstinline{\A} to refer to text mode A in math mode}
+
 \verb=\numberthis=
 \explain{Add the line number in unnumbered math environment}
 
@@ -360,6 +367,10 @@ Listings need to be accessed through the begin and end method:
 \newpage
 \section{Other Notable Commands}
 
+\verb=\clsfiles= is an abbreviation of \verb=Template/clsfiles=
+
+\verb=\useclspackage[]= is an abbreviation of \verb=\usepackage{\clsfiles/}=, note that this command does not support multiple packages.
+
 \begin{verbatim}
   \renewcommand{\qedsymbol}
   {$_{\scriptstyle \substack{\sc{quod}\\\sc{erat}\\\sc{dem}
@@ -389,6 +400,18 @@ Listings need to be accessed through the begin and end method:
 
 \verb=\aand,\oor,\iimplies,\iif,\xor=
 \explain{The weird symbols for CSC240}
+
+The main keywords are also included
+
+\begin{verbatim}
+    \newop{\TO}{\tbf{to}}
+    \newop{\DO}{\tbf{do}}
+    \newop{\THEN}{\tbf{then}}
+    \newop{\RTN}{\tbf{return}}
+    \newop{\Precon}{\tbf{Precondition}}
+    \newop{\Postcon}{\tbf{Postcondition}}
+    \newop{\Termi}{\tbf{Termination}}
+\end{verbatim}
 
 \subsection{Alg}
 
@@ -429,6 +452,11 @@ Moreover,
     \alen{#1} - $#1.length$
     \ag{#1}{#2} - $#1 \gets #2$
 \end{latexcode}
+
+Also, to remove the prefix "func" or "proc", use \verb=\nofuncname= or \verb=\noprocname=.
+
+In addition, \verb=\newfunc{func name}{func content}= creates a single function that number the lines excluding the function name.
+
 
 
 \newpage
