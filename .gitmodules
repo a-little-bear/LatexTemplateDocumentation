@@ -1,0 +1,3 @@
+[submodule "LatexTemplate"]
+	path = LatexTemplate
+	url = https://github.com/a-little-bear/LatexTemplate.git
